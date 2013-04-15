@@ -10,7 +10,10 @@
   "scripts": {
     "test": "mocha --harmony test"
   },
-  "repository": "",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/nodengn/ngn-idk-http-api.git"
+  },
   "keywords": [
     "NGN",
     "API",
