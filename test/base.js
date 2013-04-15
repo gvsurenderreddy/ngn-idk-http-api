@@ -1,17 +1,14 @@
 // Include NGN (locally)
 var assert = require('assert'),
     path = require('path'),
+    http = require('http'),
     port = 3000;
 
 UTIL.testing = true;
 
-/**
- * Make sure the NGN Utilities namespace is available.
- */
-suite('IDK HTTP Web Sanity Test', function(){
+suite('IDK API Sanity Test', function(){
 
-  var lib = null,
-      client = null;
+  var lib = null;
 
   // Basic Sanity Tests
   test('NGN.http.ApiServer exists.', function(){
@@ -20,21 +17,28 @@ suite('IDK HTTP Web Sanity Test', function(){
 
   // Make sure the classes instantiate
   test('new NGN.http.WebServer() constructed.', function(done){
-    var ws = new NGN.http.ApiServer({
+    var api = new NGN.http.ApiServer({
       port: port,
       routes: 'test/routes',
       autoStart: false
     });
-    assert.ok(ws !== undefined,'Could not create new NGN.http.ApiServer()');
+    assert.ok(api !== undefined,'Could not create new NGN.http.ApiServer()');
 
-    ws.on('ready',function(){
-      /*client.GET('http://localhost:'+port+'/test',function(err,res,body){
-        assert.ok(body == 'Basic Test');
-        done();
-      });*/
-     done()
+    api.on('ready',function(){
+      http.get('http://localhost:'+port+'/',function(res){
+        var out = '';
+        assert.ok(res.statusCode == 200);
+
+        res.on("data", function(chunk) {
+          out += chunk;
+        });
+        res.on('end',function(){
+          assert.ok(JSON.parse(out).hello == 'Hello. I am root.');
+          done();
+        });
+      });
     });
 
-    ws.start();
+    api.start();
   });
 });
