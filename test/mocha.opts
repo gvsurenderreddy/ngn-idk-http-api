@@ -1,0 +1,6 @@
+--harmony
+--require ../../ngn
+--reporter spec
+--ui tdd
+--growl
+--globals UTIL,NGN,ngn,nocirculr
