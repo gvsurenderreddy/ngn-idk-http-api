@@ -1,6 +1,6 @@
 {
   "name": "ngn-idk-http-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The API & Data IDK for NGN.",
   "main": "lib/bootstrap.js",
   "directories": {
@@ -11,8 +11,8 @@
     "test": "mocha --harmony test"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/nodengn/ngn-idk-http-api.git"
+    "type": "git",
+    "url": "https://github.com/nodengn/ngn-idk-http-api.git"
   },
   "keywords": [
     "NGN",
